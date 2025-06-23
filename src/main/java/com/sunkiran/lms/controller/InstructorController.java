@@ -4,6 +4,7 @@ import com.sunkiran.lms.dto.request.InstructorDto;
 import com.sunkiran.lms.model.Instructor;
 import com.sunkiran.lms.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/instructor")
 @RequiredArgsConstructor
+@Slf4j
 public class InstructorController {
     private final InstructorService instructorService;
 
@@ -22,16 +24,18 @@ public class InstructorController {
         return new ResponseEntity<>(instructor, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{instructorId}")
-    public ResponseEntity<Instructor> getInstructor(@PathVariable Long instructorId) {
-        Instructor instructor = instructorService.getInstructorById(instructorId);
+    @PutMapping("/{instructorId}")
+    public ResponseEntity<Instructor> updateInstructor(@PathVariable Long instructorId, @RequestBody InstructorDto instructorDto) {
+        Instructor instructor = instructorService.updateInstructor(instructorId, instructorDto);
         return new ResponseEntity<>(instructor, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{instructorId}")
-    public ResponseEntity<Boolean> removeInstructor(@PathVariable Long instructorId) {
-        boolean isRemoved = instructorService.removeInstructor(instructorId);
-        return new ResponseEntity<>(isRemoved, HttpStatus.OK);
+    @GetMapping("/{instructorId}")
+    public ResponseEntity<Instructor> getInstructor(@PathVariable Long instructorId) {
+        log.info("START: InstructorController --> getInstructor");
+        Instructor instructor = instructorService.getInstructorById(instructorId);
+        log.info("END: InstructorController --> getInstructor");
+        return new ResponseEntity<>(instructor, HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -44,6 +48,12 @@ public class InstructorController {
     public ResponseEntity<Instructor> getInstructorByName(@PathVariable String name) {
         Instructor instructor = instructorService.getInstructorByName(name);
         return new ResponseEntity<>(instructor, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{instructorId}")
+    public ResponseEntity<Boolean> removeInstructor(@PathVariable Long instructorId) {
+        boolean isRemoved = instructorService.removeInstructor(instructorId);
+        return new ResponseEntity<>(isRemoved, HttpStatus.OK);
     }
 
 }

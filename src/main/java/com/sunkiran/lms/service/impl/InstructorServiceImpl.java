@@ -8,12 +8,14 @@ import com.sunkiran.lms.repo.CourseRepository;
 import com.sunkiran.lms.repo.InstructorRepository;
 import com.sunkiran.lms.service.InstructorService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class InstructorServiceImpl implements InstructorService {
 
     private final InstructorRepository instructorRepository;
@@ -63,7 +65,10 @@ public class InstructorServiceImpl implements InstructorService {
 
     @Override
     public Instructor getInstructorById(Long id) {
+        log.info("START: InstructorServiceImpl --> getInstructorById");
+        log.debug("Instructor Id: {}", id);
         Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new RuntimeException("Instructor with given Id is not found"));
+        log.info("END: InstructorServiceImpl --> getInstructorById");
         return instructor;
     }
 
