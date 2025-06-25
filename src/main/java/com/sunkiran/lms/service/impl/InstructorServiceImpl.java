@@ -2,6 +2,8 @@ package com.sunkiran.lms.service.impl;
 
 import com.sunkiran.lms.dto.request.CourseDto;
 import com.sunkiran.lms.dto.request.InstructorDto;
+import com.sunkiran.lms.exception.BusinessException;
+import com.sunkiran.lms.exception.ErrorCode;
 import com.sunkiran.lms.model.Course;
 import com.sunkiran.lms.model.Instructor;
 import com.sunkiran.lms.repo.CourseRepository;
@@ -67,7 +69,7 @@ public class InstructorServiceImpl implements InstructorService {
     public Instructor getInstructorById(Long id) {
         log.info("START: InstructorServiceImpl --> getInstructorById");
         log.debug("Instructor Id: {}", id);
-        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new RuntimeException("Instructor with given Id is not found"));
+        Instructor instructor = instructorRepository.findById(id).orElseThrow(() -> new BusinessException(ErrorCode.INSTRUCTOR_NOT_FOUND,"Instructor with given Id is not found"));
         log.info("END: InstructorServiceImpl --> getInstructorById");
         return instructor;
     }
