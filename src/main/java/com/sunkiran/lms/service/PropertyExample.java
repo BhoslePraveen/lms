@@ -40,11 +40,9 @@ public class PropertyExample {
 
     @Value("#{'${app.roles}'.split(',')}")
     private List<String> roles;
-
-
-    // TODO : Fix this : Not able to resolve the value.
-//    @Value("#{${'theme':'${app.settings.theme}', 'language':'${app.settings.language}'}}")
-//    private Map<String, String> settings;
+    
+    @Value("#{ {'theme' : '${app.settings.theme}', 'language' : '${app.settings.language}'} }")
+    private Map<String, String> settings;
 
 
 
@@ -58,7 +56,7 @@ public class PropertyExample {
 
         System.out.println("Servers: " + Arrays.toString(servers) );
         System.out.println("Roles: " + roles);
-       // System.out.println("Settings: " + settings);
+        System.out.println("Settings: " + settings);
 
     }
 }

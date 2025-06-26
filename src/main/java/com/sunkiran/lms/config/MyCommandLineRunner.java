@@ -20,5 +20,8 @@ public class MyCommandLineRunner implements org.springframework.boot.CommandLine
         System.out.println(appConfigProperties.getTimeoutMs());
         System.out.println(appConfigProperties.getSettings().getTheme());
         System.out.println(appConfigProperties.getSettings().getLanguage());
+        
+        
+        propertyExample.printProperties();
     }
 }
