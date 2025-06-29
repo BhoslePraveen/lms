@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sunkiran.lms.model.User;
 import com.sunkiran.lms.service.PropertyExample;
 import com.sunkiran.lms.service.RestTemplatePracticeService;
+import com.sunkiran.lms.service.WebClientPracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,6 +21,8 @@ public class MyCommandLineRunner implements org.springframework.boot.CommandLine
     private ObjectMapper objectMapper ;
     @Autowired
     private RestTemplatePracticeService restTemplatePracticeService;
+    @Autowired
+    private WebClientPracticeService webClientPracticeService;
 
 //    @Override
 //    public void run(String... args) throws Exception {
@@ -46,7 +49,7 @@ public class MyCommandLineRunner implements org.springframework.boot.CommandLine
     @Override
     public void run(String... args) throws Exception {
 
-        restTemplatePracticeService.exchangePostM1();
+        webClientPracticeService.getPostM1();
 
 
     }
