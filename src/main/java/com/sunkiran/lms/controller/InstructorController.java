@@ -1,8 +1,13 @@
 package com.sunkiran.lms.controller;
 
 import com.sunkiran.lms.dto.request.InstructorDto;
+import com.sunkiran.lms.exception.ErrorResponse;
 import com.sunkiran.lms.model.Instructor;
 import com.sunkiran.lms.service.InstructorService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,6 +24,15 @@ public class InstructorController {
     private final InstructorService instructorService;
 
     @PostMapping("/register")
+    @Operation(summary = "Register a new Instructor"
+    , description = "This method is used to register a new Instructor to Lms"
+//    , tags = {"Instructor"}
+    ,responses = {
+            @ApiResponse(responseCode = "201", description = "Instructor registered successfully",content = {@Content(mediaType = "application/json",schema = @Schema(implementation = Instructor.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad Request - Proper details Not given",content = {@Content(mediaType = "application/json",schema = @Schema(implementation = ErrorResponse.class))}),
+            @ApiResponse(responseCode = "409", description = "Conflict - Instructor already exists"),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error - Something went wrong- Pls contact support")
+    })
     public ResponseEntity<Instructor> registerInstructor(@RequestBody InstructorDto instructorDto) {
         Instructor instructor = instructorService.registerInstructor(instructorDto);
         return new ResponseEntity<>(instructor, HttpStatus.CREATED);
