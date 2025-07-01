@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 
-@Configuration
+//@Configuration
 public class MyCommandLineRunner implements org.springframework.boot.CommandLineRunner{
 
     @Autowired
