@@ -1,5 +1,6 @@
 package com.sunkiran.lms.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,5 +22,6 @@ public class Module {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonBackReference
     private Course course;
 }
