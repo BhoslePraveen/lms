@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.stylesheets.LinkStyle;
 
@@ -13,6 +14,7 @@ import java.util.List;
 @Data
 @Component
 @ConfigurationProperties(prefix = "app")
+@Profile("!test")
 public class AppConfigProperties {
     @NotNull
     private String name;

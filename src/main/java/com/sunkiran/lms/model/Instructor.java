@@ -2,8 +2,7 @@ package com.sunkiran.lms.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +11,8 @@ import java.util.List;
 @Table(name = "instructors")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Instructor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +24,7 @@ public class Instructor {
     @Column(name = "spec")
     private String specialization;
 
-    @OneToMany( mappedBy = "instructor", cascade = CascadeType.ALL)
+    @OneToMany( mappedBy = "instructor", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Course> courses = new ArrayList<>();
 }

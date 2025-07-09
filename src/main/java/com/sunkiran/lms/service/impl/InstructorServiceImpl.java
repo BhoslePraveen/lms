@@ -9,6 +9,7 @@ import com.sunkiran.lms.model.Instructor;
 import com.sunkiran.lms.repo.CourseRepository;
 import com.sunkiran.lms.repo.InstructorRepository;
 import com.sunkiran.lms.service.InstructorService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
